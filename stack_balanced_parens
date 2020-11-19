@@ -1,0 +1,46 @@
+from stack import Stack
+
+sentence = "i am Yash"
+
+
+for character in sentence:
+    print(character)
+    print("\n")
+
+
+def is_match(p1, p2):
+
+    if p1 == "(" and p2 == ")":
+        return True
+    elif p1 == "{" and p2 == "}":
+        return True
+    elif p1 == "[" and p2 == "]":
+        return True
+    else:
+        return False
+
+
+def is_parenthesis_balanced_string(paren_string):
+    index = 0
+    s = Stack()
+    while index < len(paren_string):
+        symbol = paren_string[index]
+        if symbol in "{([":
+            s.push(symbol)
+        else:
+            if s.is_empty():
+                return False
+            else:
+                top = s.pop()
+                if not is_match(top, paren):
+                    return False
+        index += 1
+
+    if s.is_empty():
+        return True
+
+    else:
+        return False
+
+
+print(is_parenthesis_balanced_string("((("))
